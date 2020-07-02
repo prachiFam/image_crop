@@ -134,7 +134,7 @@ class CropState extends State<Crop> with TickerProviderStateMixin, Drag {
   }
 
   @override
-  void didUpdateWidget(FamCropper oldWidget) {
+  void didUpdateWidget(Crop oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.image != oldWidget.image) {
       _getImage();
