@@ -68,7 +68,7 @@ class Crop extends StatefulWidget {
 }
 
 class CropState extends State<Crop> with TickerProviderStateMixin, Drag {
-  final _surfaceKey = GlobalKey();
+   final _surfaceKey = GlobalKey();
   AnimationController _activeController;
   AnimationController _settleController;
   ImageStream _imageStream;
@@ -110,7 +110,7 @@ class CropState extends State<Crop> with TickerProviderStateMixin, Drag {
     _ratio = 1.0;
     _lastFocalPoint = Offset.zero;
     _action = _CropAction.none;
-    _handle = _CropHandleSide.none;
+    // _handle = _CropHandleSide.none;
     _activeController = AnimationController(
       vsync: this,
       value: widget.alwaysShowGrid ? 1.0 : 0.0,
@@ -134,7 +134,7 @@ class CropState extends State<Crop> with TickerProviderStateMixin, Drag {
   }
 
   @override
-  void didUpdateWidget(Crop oldWidget) {
+  void didUpdateWidget(FamCropper oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.image != oldWidget.image) {
       _getImage();
@@ -445,15 +445,19 @@ class CropState extends State<Crop> with TickerProviderStateMixin, Drag {
   }
 
   void _handleScaleUpdate(ScaleUpdateDetails details) {
-    if (_action == _CropAction.none) {
-      if (_handle == _CropHandleSide.none) {
-        _action = details.rotation == 0.0 && details.scale == 1.0
-            ? _CropAction.moving
-            : _CropAction.scaling;
-      } else {
-        _action = _CropAction.cropping;
-      }
-    }
+//    if (_action == _CropAction.none) {
+//      if (_handle == _CropHandleSide.none) {
+//        _action = details.rotation == 0.0 && details.scale == 1.0
+//            ? _CropAction.moving
+//            : _CropAction.scaling;
+//      } else {
+//       // _action = _CropAction.cropping;
+//      }
+//    }
+
+    _action = details.rotation == 0.0 && details.scale == 1.0
+        ? _CropAction.moving
+        : _CropAction.scaling;
 
     if (_action == _CropAction.cropping) {
       final delta = details.focalPoint - _lastFocalPoint;
